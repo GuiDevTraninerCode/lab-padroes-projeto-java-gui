@@ -1,14 +1,21 @@
 package one.digitalinnovation.gof;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import one.digitalinnovation.gof.facade.Facade;
 import one.digitalinnovation.gof.singleton.SingletonEager;
 import one.digitalinnovation.gof.singleton.SingletonLazy;
 import one.digitalinnovation.gof.singleton.SingletonLazyHolder;
-import one.digitalinnovation.gof.strategy.Comportamento;
-import one.digitalinnovation.gof.strategy.ComportamentoAgressivo;
-import one.digitalinnovation.gof.strategy.ComportamentoDefensivo;
-import one.digitalinnovation.gof.strategy.ComportamentoNormal;
-import one.digitalinnovation.gof.strategy.Robo;
+import one.digitalinnovation.gof.strategy.Posicao;
+import one.digitalinnovation.gof.strategy.PosicaoFive;
+import one.digitalinnovation.gof.strategy.PosicaoFour;
+import one.digitalinnovation.gof.strategy.PosicaoOne;
+import one.digitalinnovation.gof.strategy.PosicaoSix;
+import one.digitalinnovation.gof.strategy.PosicaoThree;
+import one.digitalinnovation.gof.strategy.PosicaoTwo;
+import one.digitalinnovation.gof.strategy.Dado;
 
 public class Test {
 
@@ -32,21 +39,30 @@ public class Test {
 		System.out.println(lazyHolder);
 		
 		// Strategy
+		List<Posicao> list = new ArrayList<>();
+		Random random = new Random();
+		Posicao um = new PosicaoOne();
+		list.add(um);
+		Posicao dois = new PosicaoTwo();
+		list.add(dois);
+		Posicao tres = new PosicaoThree();
+		list.add(tres);
+		Posicao quatro = new PosicaoFour();
+		list.add(quatro);
+		Posicao cinco = new PosicaoFive();
+		list.add(cinco);
+		Posicao seis = new PosicaoSix();
+		list.add(seis);
 		
-		Comportamento defensivo = new ComportamentoDefensivo();
-		Comportamento normal = new ComportamentoNormal();
-		Comportamento agressivo = new ComportamentoAgressivo();
 		
-		Robo robo = new Robo();
-		robo.setComportamento(normal);
-		robo.mover();
-		robo.mover();
-		robo.setComportamento(defensivo);
-		robo.mover();
-		robo.setComportamento(agressivo);
-		robo.mover();
-		robo.mover();
-		robo.mover();
+		
+		Dado dado = new Dado();
+
+		for(int i = 0;i<10;i++){
+			int numeroAleatorio = random.nextInt(list.size());
+			dado.setPosicao(list.get(numeroAleatorio));
+			dado.exporPosPraCima();
+		}
 		
 		// Facade
 		
